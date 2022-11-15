@@ -1,9 +1,4 @@
 <?php 
-if(!isset($_SERVER['HTTP_REFERER'])){
-    header('location: index.php');
-    exit;
-}
-
 $dbcon = mysqli_connect('localhost', 'root', '', 'losske');
 
 date_default_timezone_set("Asia/Jakarta");
