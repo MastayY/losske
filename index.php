@@ -34,7 +34,7 @@ $posts = query("SELECT * FROM posts ORDER BY id DESC");
             <?php else: ?>
             <div class="user-profile">
                 <div class="profil">
-                    <img src="assets/img/profile/<?= $pic[0]["userpicture"] ?>" alt="" height="35px" width="35px" style="border-radius: 50%;">
+                    <img src="assets/img/profile/<?= $pic[0]["userpicture"] ?>" alt="">
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="profile-card">

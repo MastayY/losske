@@ -17,6 +17,7 @@ h1 {
 }
 .profile-content {
     display: block;
+    padding: 10px 20px;
     margin: auto;
     max-width: 1000px;
 }
@@ -148,4 +149,48 @@ footer {
     text-align: center;
     color: #ffffffb9;
     background-color: #1e1ae0;
+}
+
+
+@media only screen and (max-width: 768px) {
+    nav img {
+        height: 45px;
+    }
+    nav button {
+        font-size: 15px;
+        padding: 5px 10px;
+        font-weight: 400;
+    }
+    .profile-section {
+        padding: 12px 15px;
+        gap: 20px;
+    }
+    .profile-section img {
+        height: 50px;
+        width: 50px;
+    }
+    .profile-info p {
+        font-size: 10px;
+    }
+    .profile-info .title {
+        font-size: 9px;
+    }
+
+    .post-header img {
+        height: 35px;
+        width: 35px;
+    }
+    .username {
+        font-size: 15px;
+    }
+    .timestamp {
+        font-size: 11px;
+    }
+    .post-content p {
+        font-size: 12px;
+    }
+    .post-footer button {
+        font-size: 14px;
+        padding: 7px 12px;
+    }
 }

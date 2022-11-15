@@ -1,7 +1,7 @@
 <?php 
 session_start();
-if( !isset($_SESSION["login"]) ) {
-    header('Location: login.php');
+if(!isset($_SERVER['HTTP_REFERER'])){
+    header('location: index.php');
     exit;
 }
 require('functions.php');
@@ -52,7 +52,7 @@ $num = count($posts);
             </div>
             <h1><span><?= $num; ?></span> Postingan</h1>
             <?php foreach($posts as $post): ?>
-                <div id="postingan">
+            <div id="postingan">
                 <div class="content">
                     <div class="post-header">
                         <img src="assets/img/profile/<?= $post['userpic'] ?>" alt="" height="50px" width="50px">

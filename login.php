@@ -35,8 +35,8 @@ if( isset($_POST["submit"]) ) {
             // cek remember me
             if( isset($_POST['remember']) ) {
                 // Set cookie
-                setcookie('num', $row['id'], time() + 60);
-                setcookie('key', hash('sha256', $row['username']), time() + 60);
+                setcookie('num', $row['id'], time() + 86400);
+                setcookie('key', hash('sha256', $row['username']), time() + 86400);
             }
             header('Location: index.php');
             exit;

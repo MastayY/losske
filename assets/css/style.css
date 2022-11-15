@@ -155,10 +155,13 @@ nav .login-btn:hover:before {
     font-size: 15px;
     color: #01001b;
 }
-.user-profile img {
+.profil img {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
     border: 1px solid #01001b;
 }
-.user-profile i {
+.profil i {
     font-size: 16px;
     padding: 0 5px;
 }
@@ -243,10 +246,18 @@ h1.public-post {
 .posting textarea {
     padding: 10px;
     resize: vertical;
+    border: 2px solid #01001b;
     border-radius: 0 20px 20px 20px;
+    font-family: 'Inter', sans-serif;
     margin: 0 8px; 
     width: 90%; 
-    height: 100px
+    height: 100px;
+    transition: .2s;
+}
+.posting textarea:focus {
+    outline: none;
+    border: 2px solid #0300c5;
+    box-shadow: 0 0 10px rgba(3, 0, 197, 0.337);
 }
 .content .posting2 {
     display: flex;
@@ -366,6 +377,13 @@ footer {
         font-size: 15px;
         padding: 5px 10px;
         font-weight: 400;
+    }
+    .profil i {
+        font-size: 11px;
+    }
+    .profil img {
+        height: 30px;
+        width: 30px;
     }
     .container > h1 {
         font-size: 18px;

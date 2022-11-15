@@ -47,13 +47,13 @@ form input:focus {
 }
 .btn-info a {
     margin: 7px 0;
-    font-size: 11px;
+    font-size: 10px;
 }
 .remember-me {
     display: flex;
     align-items: center;
     gap: 3px;
-    font-size: 12px;
+    font-size: 11px;
 }
 .btn-sec button {
     width: 100%;
