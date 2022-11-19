@@ -17,7 +17,8 @@ if( isset($_POST["submit"]) ) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/login.css?v=<?php echo time(); ?>">
-    <title>Document</title>
+    <link rel="shortcut icon" href="icon.png" type="image">
+    <title>Losske | Register</title>
 </head>
 <body>
     <div class="login-form">

@@ -6,10 +6,11 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 }
 require('functions.php');
 
-$id = $_GET['id'];
+// $id = $_GET['id'];
+$usernameProfile = $_GET['username'];
 $username = $_SESSION['username'];
 
-$user = query("SELECT * FROM users WHERE id = $id");
+$user = query("SELECT * FROM users WHERE username = '$usernameProfile'");
 $posts = query("SELECT * FROM posts WHERE postedby = '$username' ORDER BY id DESC");
 $num = count($posts);
 
@@ -21,7 +22,8 @@ $num = count($posts);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/profile.css?v=<?php echo time(); ?>">
-    <title>Document</title>
+    <link rel="shortcut icon" href="icon.png" type="image">
+    <title>Losske | Profil</title>
 </head>
 <body>
     <section>

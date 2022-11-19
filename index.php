@@ -19,7 +19,8 @@ $posts = query("SELECT * FROM posts ORDER BY id DESC");
     <script src="https://kit.fontawesome.com/f760262075.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
-    <title>Projek First PHP</title>
+    <link rel="shortcut icon" href="icon.png" type="image">
+    <title>Losske | Beranda</title>
 </head>
 <body>
     <div class="container">
@@ -44,7 +45,7 @@ $posts = query("SELECT * FROM posts ORDER BY id DESC");
                         <p>@<?= $pic[0]["username"] ?></p>
                     </div>
                     <ul>
-                        <li><a href="profile.php?id=<?= $pic[0]["id"] ?>">Profile</a></li>
+                        <li><a href="profile.php?username=<?= $pic[0]["username"] ?>">Profile</a></li>
                         <li><a href="logout.php">Logout</a></li>
                     </ul>
                 </div>
