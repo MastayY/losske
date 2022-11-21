@@ -2,6 +2,19 @@
 session_start();
 require('functions.php');
 
+if( isset($_COOKIE["num"]) && isset($_COOKIE["key"]) ) {
+    $id = $_COOKIE["num"];
+    $key = $_COOKIE["key"];
+    //ambil username berdasarkan id
+    $result = mysqli_query($dbcon, "SELECT username FROM users WHERE id = $id");
+    $row = mysqli_fetch_assoc($result);
+    //cek cookie dan username
+    if( $key === hash('sha256', $row['username']) ) {
+        $_SESSION['login'] = true;
+        $_SESSION['username'] = $row['username'];
+    }
+}
+
 if( isset($_SESSION["login"]) ) {
     $username = $_SESSION["username"];
     $pic = query("SELECT * FROM users WHERE username = '$username'");
