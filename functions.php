@@ -17,7 +17,7 @@ function query($query) {
 function addPost($post) {
     global $dbcon;
 
-    $content = mysqli_real_escape_string($dbcon, htmlspecialchars($_POST["teks"]));
+    $content = mysqli_real_escape_string($dbcon, strip_tags($_POST["teks"], '<br><strong><i>'));
     // $postImg = $_POST["postimage"];
     $time = date('d F Y H:i');
     $postedby = $_POST["username"];
@@ -54,6 +54,31 @@ function register($data) {
     $password = password_hash($password, PASSWORD_DEFAULT);
     // tambahkan ke database
     mysqli_query($dbcon, "INSERT INTO users VALUES('','$fullname', '$username','$email', '$password', 'default.png', '$create')");
+
+    return mysqli_affected_rows($dbcon);
+}
+
+function delete($id) {
+    global $dbcon;
+    mysqli_query($dbcon, "DELETE FROM posts WHERE id = $id");
+
+    return mysqli_affected_rows($dbcon);
+}
+
+function editProfile($data) {
+    global $dbcon;
+
+    $id = $data["id"];
+    $fullname = htmlspecialchars($data["fullname"]);
+    $email = $data["email"];
+
+    // insert query
+    $query = "UPDATE users SET
+                fullname = '$fullname',
+                email = '$email'
+             WHERE id = $id
+             "; 
+    mysqli_query($dbcon, $query);
 
     return mysqli_affected_rows($dbcon);
 }

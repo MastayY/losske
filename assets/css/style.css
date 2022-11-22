@@ -315,7 +315,66 @@ h1.public-post {
     align-items: center;
 }
 .post-info {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
     padding: 0 8px;
+}
+.option {
+    position: relative;
+    padding: 8px 15px;
+    font-size: 20px;
+    border-radius: 50%;
+    transition: .2s;
+    cursor: pointer;
+}
+.post-info input[type="checkbox"] {
+    position: absolute;
+    right: 36px;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 1;
+}
+.option-list {
+    display: none;
+    position: absolute;
+    right: 60px;
+    top: 60px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    border-top: 3px solid #c50000;
+    border-radius: 7px 0 7px 7px;
+}
+.post-info input[type="checkbox"]:checked ~ .option-list {
+    display: block;
+}
+.option-list ul {
+    text-align: center;
+    list-style: none;
+}
+.option-list ul li a {
+    display: block;
+    padding: 3px 25px;
+    border-radius: 7px 0 7px 7px;
+    font-size: 15px;
+    color: #01001b;
+    text-decoration: none;
+}
+.option-list ul li a:hover {
+    background-color: #c50000;
+    color: #fefefe;
+}
+.post-info input[type="checkbox"]:hover ~ .option {
+    background-color: #01001b1e;
+}
+.username {
+    text-decoration: none;
+    color: #01001b;
+}
+.username:hover {
+    text-decoration: underline;
 }
 .timestamp {
     font-size: 13px;
@@ -364,7 +423,6 @@ footer {
     color: #ffffffb9;
     background-color: #1e1ae0;
 }
-
 
 @media only screen and (max-width: 768px) {
     .container {

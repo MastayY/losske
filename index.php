@@ -110,12 +110,28 @@ $posts = query("SELECT * FROM posts ORDER BY id DESC");
                 <div class="post-header">
                     <img src="assets/img/profile/<?= $post['userpic'] ?>" alt="" height="50px" width="50px">
                     <div class="post-info">
-                        <p class="username"><?= $post['postedby'] ?></p>
-                        <p class="timestamp"><?= $post['postdate'] ?></p>
+                        <div class="user-info">
+                            <a href="profile.php?username=<?= $post['postedby'] ?>" class="username"><?= $post['postedby'] ?></a>
+                            <p class="timestamp"><?= $post['postdate'] ?></p>
+                        </div>
+                        <?php if( isset($_SESSION['login']) ): ?>
+                            <?php if( $_SESSION['username'] == $post['postedby'] ): ?>
+                            <input type="checkbox" id="check">
+                            <i class="fa-solid fa-ellipsis-vertical option" id="option"></i>
+                            <div class="option-list" id="option-list">
+                                <ul>
+                                    <!-- <li><a href="editpost.php">Edit</a></li> -->
+                                    <li><a href="delete.php?id=<?= $post['id'] ?>" onclick="return confirm('Anda yakin ingin menghapus data ini?');"><i class="fa-solid fa-trash-can"></i> Hapus</a></li>
+                                </ul>
+                            </div>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="post-content">
-                    <p><?= $post['postcontent'] ?></p>
+                    <div class="postingan">
+                        <?= $post['postcontent'] ?>
+                    </div>
                     <?php if( isset($post['postimg']) ): ?>
                     <img src="assets/img/post-img/<?= $post['postimg'] ?>" alt="" class="post-img">
                     <?php endif; ?>
@@ -139,6 +155,7 @@ $posts = query("SELECT * FROM posts ORDER BY id DESC");
     profil.addEventListener('click', function () {
         profileCard.classList.toggle('active');
     });
+    
 </script>
 </body>
 </html>

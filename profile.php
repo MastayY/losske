@@ -6,12 +6,10 @@ if(!isset($_SERVER['HTTP_REFERER'])){
 }
 require('functions.php');
 
-// $id = $_GET['id'];
 $usernameProfile = $_GET['username'];
-$username = $_SESSION['username'];
 
 $user = query("SELECT * FROM users WHERE username = '$usernameProfile'");
-$posts = query("SELECT * FROM posts WHERE postedby = '$username' ORDER BY id DESC");
+$posts = query("SELECT * FROM posts WHERE postedby = '$usernameProfile' ORDER BY id DESC");
 $num = count($posts);
 
 ?>
@@ -21,6 +19,7 @@ $num = count($posts);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f760262075.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/profile.css?v=<?php echo time(); ?>">
     <link rel="shortcut icon" href="icon.png" type="image">
     <title>Losske | Profil</title>
@@ -39,7 +38,9 @@ $num = count($posts);
             <div class="profile-section">
                 <div class="img">
                     <img src="assets/img/profile/<?= $user[0]['userpicture'] ?>" alt="">
-                    <!-- <a href="edit-profile.php">Edit Profil</a> -->
+                    <?php if( $usernameProfile == $_SESSION['username'] ): ?>
+                    <a href="edit-profile.php" class="edit-profile"><i class="fa-solid fa-pen-to-square"></i> Edit Profil</a>
+                    <?php endif; ?>
                 </div>
                 <div class="profile-info">
                     <p class="title">Nama Lengkap</p>
