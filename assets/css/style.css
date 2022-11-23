@@ -191,7 +191,7 @@ nav .login-btn:hover:before {
     border: 5px solid #0300c5;
 }
 .profile-card h1 {
-    font-size: 20px;
+    font-size: 18px;
     padding-top: 10px;
 }
 .profile-card p {
@@ -205,6 +205,13 @@ nav .login-btn:hover:before {
     text-decoration: none;
     padding: 10px 0;
     transition: .2s;
+    color: #01001b;
+}
+.profile-card ul li a:hover i {
+    color: #fefefe;
+}
+.profile-card ul li a i {
+    color: #0300c5;
 }
 .profile-card ul li a:hover {
     color: #fefefe;
@@ -320,6 +327,15 @@ h1.public-post {
     justify-content: space-between;
     align-items: center;
     padding: 0 8px;
+}
+.user {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+.user img {
+    height: 20px;
+    width: 20px;
 }
 .option {
     position: relative;
@@ -443,6 +459,15 @@ footer {
         height: 30px;
         width: 30px;
     }
+    .post-text {
+        font-size: 13px;
+    }
+    .profile-card h1 {
+        font-size: 15px;
+    }
+    .profile-card p {
+        font-size: 12px;
+    }
     .container > h1 {
         font-size: 18px;
     }
@@ -476,5 +501,9 @@ footer {
     .post-footer button {
         font-size: 14px;
         padding: 7px 12px;
+    }
+    .user img {
+        height: 16px;
+        width: 16px;
     }
 }

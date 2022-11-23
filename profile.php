@@ -51,6 +51,24 @@ $num = count($posts);
                     <p><?= $user[0]['email'] ?></p>
                     <p class="title">Dibuat Tanggal</p>
                     <p><?= $user[0]['createddate'] ?></p>
+                    <p class="title">Status</p>
+                    <div class="user">
+                        <?php if( $user[0]['status'] == 'verified' ): ?>
+                        <p style="color: #07c4d9;">Verified</p>
+                        <img src="assets/img/badge/verified.gif" alt="">
+                        <?php endif; ?>
+                        <?php if( $user[0]['status'] == 'amogus' ): ?>
+                        <p style="color: #ffb700;">Suspicious</p>
+                        <img src="assets/img/badge/amogus.gif" alt="">
+                        <?php endif; ?>
+                        <?php if( $user[0]['status'] == 'admin' ): ?>
+                        <p style="color: #ff0000; font-weight: bold;">Admin</p>
+                        <img src="assets/img/badge/admin.gif" alt="">
+                        <?php endif; ?>
+                        <?php if( $user[0]['status'] == 'None' ): ?>
+                        <p>Pengguna Biasa</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
             <h1><span><?= $num; ?></span> Postingan</h1>
@@ -60,7 +78,23 @@ $num = count($posts);
                     <div class="post-header">
                         <img src="assets/img/profile/<?= $post['userpic'] ?>" alt="" height="50px" width="50px">
                         <div class="post-info">
-                            <p class="username"><?= $post['postedby'] ?></p>
+                        <div class="user">
+                                <?php if( $user[0]['status'] == 'verified' ): ?>
+                                <p class="username"><?= $post['postedby'] ?></p>
+                                <img src="assets/img/badge/verified.gif" alt="">
+                                <?php endif; ?>
+                                <?php if( $user[0]['status'] == 'amogus' ): ?>
+                                <p class="username"><?= $post['postedby'] ?></p>
+                                <img src="assets/img/badge/amogus.gif" alt="">
+                                <?php endif; ?>
+                                <?php if( $user[0]['status'] == 'admin' ): ?>
+                                <p class="username" style="color: #ff0000; font-weight: bold;"><?= $post['postedby'] ?></p>
+                                <img src="assets/img/badge/admin.gif" alt="">
+                                <?php endif; ?>
+                                <?php if( $user[0]['status'] == 'None' ): ?>
+                                <p class="username"><?= $post['postedby'] ?></p>
+                                <?php endif; ?>
+                        </div>
                             <p class="timestamp"><?= $post['postdate'] ?></p>
                         </div>
                     </div>

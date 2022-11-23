@@ -58,8 +58,8 @@ $posts = query("SELECT * FROM posts ORDER BY id DESC");
                         <p>@<?= $pic[0]["username"] ?></p>
                     </div>
                     <ul>
-                        <li><a href="profile.php?username=<?= $pic[0]["username"] ?>">Profile</a></li>
-                        <li><a href="logout.php">Logout</a></li>
+                        <li><a href="profile.php?username=<?= $pic[0]["username"] ?>"><i class="fa-solid fa-user"></i> Profile</a></li>
+                        <li><a href="logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -105,17 +105,41 @@ $posts = query("SELECT * FROM posts ORDER BY id DESC");
         </form>
         <h1 class="public-post">Postingan Terbaru</h1>
         <?php foreach($posts as $post): ?>
+        <?php 
+            $userlosske = $post['postedby'];
+            $status = query("SELECT status FROM users WHERE username = '$userlosske'"); 
+        ?>
         <div id="postingan">
             <div class="content">
                 <div class="post-header">
                     <img src="assets/img/profile/<?= $post['userpic'] ?>" alt="" height="50px" width="50px">
                     <div class="post-info">
                         <div class="user-info">
-                            <a href="profile.php?username=<?= $post['postedby'] ?>" class="username"><?= $post['postedby'] ?></a>
+                            <div class="user">
+                                <?php if( $status[0]['status'] == 'verified' ): ?>
+                                <a href="profile.php?username=<?= $post['postedby'] ?>" class="username"><?= $post['postedby'] ?></a>
+                                <img src="assets/img/badge/verified.gif" alt="">
+                                <?php endif; ?>
+                                <?php if( $status[0]['status'] == 'amogus' ): ?>
+                                <a href="profile.php?username=<?= $post['postedby'] ?>" class="username"><?= $post['postedby'] ?></a>
+                                <img src="assets/img/badge/amogus.gif" alt="">
+                                <?php endif; ?>
+                                <?php if( $status[0]['status'] == 'admin' ): ?>
+                                <a href="profile.php?username=<?= $post['postedby'] ?>" class="username" style="color: #ff0000; font-weight: bold;"><?= $post['postedby'] ?></a>
+                                <img src="assets/img/badge/admin.gif" alt="">
+                                <?php endif; ?>
+                                <?php if( $status[0]['status'] == 'None' ): ?>
+                                <a href="profile.php?username=<?= $post['postedby'] ?>" class="username"><?= $post['postedby'] ?></a>
+                                <?php endif; ?>
+                            </div>
                             <p class="timestamp"><?= $post['postdate'] ?></p>
                         </div>
                         <?php if( isset($_SESSION['login']) ): ?>
-                            <?php if( $_SESSION['username'] == $post['postedby'] ): ?>
+                            <?php 
+                                $userlogin = $_SESSION['username'];
+                                $isAdmin = query("SELECT status FROM users WHERE username = '$userlogin'");    
+                            ?>
+                            <?php if( $_SESSION['username'] == $post['postedby'] || $isAdmin[0]['status'] == 'admin' ): ?>
                             <input type="checkbox" id="check">
                             <i class="fa-solid fa-ellipsis-vertical option" id="option"></i>
                             <div class="option-list" id="option-list">
@@ -129,7 +153,7 @@ $posts = query("SELECT * FROM posts ORDER BY id DESC");
                     </div>
                 </div>
                 <div class="post-content">
-                    <div class="postingan">
+                    <div class="post-text">
                         <?= $post['postcontent'] ?>
                     </div>
                     <?php if( isset($post['postimg']) ): ?>
@@ -149,6 +173,9 @@ $posts = query("SELECT * FROM posts ORDER BY id DESC");
 
 <script src="assets/js/script.js"></script>
 <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
     const profil = document.querySelector('.profil')
     const profileCard = document.querySelector('.profile-card')
 

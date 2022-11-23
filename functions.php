@@ -17,11 +17,18 @@ function query($query) {
 function addPost($post) {
     global $dbcon;
 
-    $content = mysqli_real_escape_string($dbcon, strip_tags($_POST["teks"], '<br><strong><i>'));
+    $content = mysqli_real_escape_string($dbcon, strip_tags($_POST["teks"], '<br><strong><i><a>'));
     // $postImg = $_POST["postimage"];
     $time = date('d F Y H:i');
     $postedby = $_POST["username"];
     $userpic = $_POST["userpic"];
+
+    if( strlen($content) > 300 ) {
+        echo "<script>
+                alert('Postingan tidak boleh lebih dari 300 karakter');
+            </script>";
+        return false;
+    }
 
     $query = "INSERT INTO posts
                 VALUES
@@ -37,7 +44,7 @@ function register($data) {
     global $dbcon;
 
     $fullname = htmlspecialchars($data["fullname"]);
-    $username = stripslashes($data["username"]);
+    $username = htmlspecialchars(stripslashes($data["username"]));
     $email = $data["email"];
     $password = mysqli_real_escape_string($dbcon, $data["pass"]);
     $create = date('d F Y H:i');
@@ -46,14 +53,20 @@ function register($data) {
     if( mysqli_fetch_assoc($check) ) {
         echo "<script>
                 alert('Username sudah terdaftar');
-             </script>";
+            </script>";
+        return false;
+    }
+    if( strlen($fullname) > 24 ) {
+        echo "<script>
+                alert('Nama Lengkap tidak boleh lebih dari 24 karakter');
+            </script>";
         return false;
     }
 
     // encrypt password
     $password = password_hash($password, PASSWORD_DEFAULT);
     // tambahkan ke database
-    mysqli_query($dbcon, "INSERT INTO users VALUES('','$fullname', '$username','$email', '$password', 'default.png', '$create')");
+    mysqli_query($dbcon, "INSERT INTO users VALUES('','$fullname', '$username','$email', '$password', 'default.png', '$create', 'None')");
 
     return mysqli_affected_rows($dbcon);
 }
@@ -71,6 +84,13 @@ function editProfile($data) {
     $id = $data["id"];
     $fullname = htmlspecialchars($data["fullname"]);
     $email = $data["email"];
+
+    if( strlen($fullname) > 24 ) {
+        echo "<script>
+                alert('Nama Lengkap tidak boleh lebih dari 24 karakter');
+            </script>";
+        return false;
+    }
 
     // insert query
     $query = "UPDATE users SET
