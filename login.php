@@ -1,4 +1,5 @@
 <?php 
+error_reporting(E_ALL); 
 session_start();
 require('functions.php');
 
@@ -13,6 +14,7 @@ if( isset($_POST["submit"]) ) {
     $pass = $_POST["pass"];
 
     $result = mysqli_query($dbcon, "SELECT * FROM users WHERE username = '$username'");
+    $result1 = mysqli_query($dbcon, "SELECT * FROM users WHERE email = '$username'");
 
     if( mysqli_num_rows($result) === 1 ) {
         $row = mysqli_fetch_assoc($result);
@@ -29,10 +31,12 @@ if( isset($_POST["submit"]) ) {
             }
             header('Location: index.php');
             exit;
+        } else {
+            $passwordWrong = true;
         }
+    } else {
+        $usernameNotFound = true;
     }
-
-    $error = true;
 }
 
 ?>
@@ -50,8 +54,16 @@ if( isset($_POST["submit"]) ) {
     <div class="login-form">
         <h1>LOGIN</h1>
         <form action="" method="post">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="pass" placeholder="Password">
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="Username" id="username">
+            <?php if( isset($usernameNotFound) ): ?>
+            <p class="error-msg">* Username Tidak ditemukan</p>
+            <?php endif; ?>
+            <label for="pass">Password</label>
+            <input type="password" name="pass" placeholder="Password" id="pass">
+            <?php if( isset($passwordWrong) ): ?>
+            <p class="error-msg">* Password Salah</p>
+            <?php endif; ?>
             <div class="btn-sec">
                 <div class="btn-info">
                     <a href="register.php">Belum punya akun?</a>

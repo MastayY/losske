@@ -24,10 +24,14 @@ if( isset($_POST["submit"]) ) {
     <div class="login-form">
         <h1>Register</h1>
         <form action="" method="post">
-            <input type="text" name="fullname" placeholder="Full Name" required>
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="email" name="email" placeholder="example@gmail.com" required>
-            <input type="password" name="pass" placeholder="Password" required>
+            <label for="fullname">Nama Lengkap</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Nama Lengkap" required>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+            <label for="pass">Password</label>
+            <input type="password" id="pass" name="pass" placeholder="Password" required>
             <div class="btn-sec">
                 <div class="btn-info">
                     <a href="login.php">Sudah punya akun?</a>

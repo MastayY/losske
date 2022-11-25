@@ -18,21 +18,79 @@ function addPost($post) {
     global $dbcon;
 
     $content = mysqli_real_escape_string($dbcon, strip_tags($_POST["teks"], '<br><strong><i><a>'));
-    // $postImg = $_POST["postimage"];
     $time = date('d F Y H:i');
     $postedby = $_POST["username"];
     $userpic = $_POST["userpic"];
+    $postimg = uploadPhoto();
 
-    if( strlen($content) > 300 ) {
+    if( strlen($content) > 500 ) {
         echo "<script>
-                alert('Postingan tidak boleh lebih dari 300 karakter');
+                alert('Postingan tidak boleh lebih dari 500 karakter');
             </script>";
         return false;
     }
 
     $query = "INSERT INTO posts
                 VALUES
-                ('', '$postedby', '$userpic', '$time', '', '$content')
+                ('', '$postedby', '$userpic', '$time', '$postimg', '$content')
+            ";
+
+    mysqli_query($dbcon, $query);
+
+    return mysqli_affected_rows($dbcon);
+}
+function uploadPhoto() {
+    // mengambil data foto
+    $fileName = $_FILES['postimage']['name'];
+    $fileSize = $_FILES['postimage']['size'];
+    $error = $_FILES['postimage']['error'];
+    $tmpName = $_FILES['postimage']['tmp_name'];
+    // check file ekstensi valid
+    $validExtension = ['jpg', 'jpeg', 'png', 'gif'];
+    $extension = explode('.', $fileName);
+    $extension = strtolower(end($extension));
+
+    if( !in_array($extension, $validExtension) ) {
+        echo "<script>
+                alert('Tolong upload dengan ekstensi jpg, png, jpeg, atau gif');
+              </script>";
+        return false;
+    }
+    //check file size
+    if( $fileSize > 6000000 ) {
+        echo "<script>
+                alert('Ukuran gambar tidak boleh lebih dari 5 MB');
+              </script>";
+        return false;
+    }
+    //upload database
+    // generate new photo name
+    $newFileName = uniqid();
+    $newFileName .= '.';
+    $newFileName .= $extension;
+    move_uploaded_file($tmpName, 'assets/img/post-img/' . $newFileName);
+
+    return $newFileName;
+}
+function addComment($comment) {
+    global $dbcon;
+
+    $content = mysqli_real_escape_string($dbcon, htmlspecialchars($_POST["comment"]));
+    // $postImg = $_POST["postimage"];
+    $time = date('d F Y H:i');
+    $commentTo = $_POST['comment_to'];
+    $commentBy = $_POST['comment_by'];
+
+    if( strlen($content) > 300 ) {
+        echo "<script>
+                alert('Komen tidak boleh lebih dari 300 karakter');
+            </script>";
+        return false;
+    }
+
+    $query = "INSERT INTO comments
+                VALUES
+                ('', '$commentTo', '$commentBy', '$time', '$content', '')
             ";
 
     mysqli_query($dbcon, $query);
@@ -74,6 +132,12 @@ function register($data) {
 function delete($id) {
     global $dbcon;
     mysqli_query($dbcon, "DELETE FROM posts WHERE id = $id");
+
+    return mysqli_affected_rows($dbcon);
+}
+function deleteComment($id) {
+    global $dbcon;
+    mysqli_query($dbcon, "DELETE FROM comments WHERE id = $id");
 
     return mysqli_affected_rows($dbcon);
 }

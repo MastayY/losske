@@ -1,7 +1,7 @@
 <?php 
 session_start();
-if(!isset($_SERVER['HTTP_REFERER'])){
-    header('location: index.php');
+if( !isset($_SESSION["login"]) ) {
+    header('Location: index.php');
     exit;
 }
 require('functions.php');
@@ -57,6 +57,10 @@ $num = count($posts);
                         <p style="color: #07c4d9;">Verified</p>
                         <img src="assets/img/badge/verified.gif" alt="">
                         <?php endif; ?>
+                        <?php if( $user[0]['status'] == 'special' ): ?>
+                        <p style="color: #1e1ae0;">Special User</p>
+                        <img src="assets/img/badge/special.gif" alt="">
+                        <?php endif; ?>
                         <?php if( $user[0]['status'] == 'amogus' ): ?>
                         <p style="color: #ffb700;">Suspicious</p>
                         <img src="assets/img/badge/amogus.gif" alt="">
@@ -76,12 +80,16 @@ $num = count($posts);
             <div id="postingan">
                 <div class="content">
                     <div class="post-header">
-                        <img src="assets/img/profile/<?= $post['userpic'] ?>" alt="" height="50px" width="50px">
+                        <img src="assets/img/profile/<?= $user[0]['userpicture'] ?>" alt="" height="50px" width="50px">
                         <div class="post-info">
                         <div class="user">
                                 <?php if( $user[0]['status'] == 'verified' ): ?>
                                 <p class="username"><?= $post['postedby'] ?></p>
                                 <img src="assets/img/badge/verified.gif" alt="">
+                                <?php endif; ?>
+                                <?php if( $user[0]['status'] == 'special' ): ?>
+                                <p class="username"><?= $post['postedby'] ?></p>
+                                <img src="assets/img/badge/special.gif" alt="">
                                 <?php endif; ?>
                                 <?php if( $user[0]['status'] == 'amogus' ): ?>
                                 <p class="username"><?= $post['postedby'] ?></p>
@@ -100,7 +108,7 @@ $num = count($posts);
                     </div>
                     <div class="post-content">
                         <p><?= $post['postcontent'] ?></p>
-                        <?php if( isset($post['postimg']) ): ?>
+                        <?php if( !empty($post['postimg']) ): ?>
                         <img src="assets/img/post-img/<?= $post['postimg'] ?>" alt="" class="post-img">
                         <?php endif; ?>
                     </div>

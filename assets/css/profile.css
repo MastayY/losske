@@ -19,7 +19,7 @@ h1 {
     display: block;
     padding: 10px 20px;
     margin: auto;
-    max-width: 1000px;
+    max-width: 900px;
 }
 nav {
     display: flex;
@@ -159,8 +159,8 @@ nav .login-btn:hover:before {
     gap: 1px;
 }
 .user img {
-    height: 20px;
-    width: 20px;
+    height: 23px;
+    width: 23px;
     border: none;
 }
 

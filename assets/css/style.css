@@ -9,7 +9,8 @@ body {
     font-family: 'Inter';
     overflow-x: hidden;
     background-attachment: fixed;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.4)100%, rgba(255, 255, 255, 0.4)100%), url('../img/bg.png');
+    background-color: #eeeeee;
+    /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.6)100%, rgba(255, 255, 255, 0.6)100%), url('../img/bg.png'); */
 }
 
 
@@ -96,9 +97,10 @@ body {
 
 
 .container {
+    padding: 0 30px;
     display: block;
     margin: auto;
-    max-width: 1000px;
+    max-width: 900px;
 }
 nav {
     display: flex;
@@ -238,12 +240,12 @@ h1.public-post {
 }
 
 .content {
-    margin-bottom: 30px;
+    margin: 20px 0;
     padding: 15px 20px;
     border-top: 2px solid #1e1ae0;
-    border-radius: 10px 10px 10px 0;
+    border-radius: 10px;
+    background-color: #fefefe;
     box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(4px);
 }
 .content .posting {
     display: flex;
@@ -323,6 +325,7 @@ h1.public-post {
 }
 .post-info {
     display: flex;
+    position: relative;
     width: 100%;
     justify-content: space-between;
     align-items: center;
@@ -334,11 +337,10 @@ h1.public-post {
     gap: 1px;
 }
 .user img {
-    height: 20px;
-    width: 20px;
+    height: 23px;
+    width: 23px;
 }
 .option {
-    position: relative;
     padding: 8px 15px;
     font-size: 20px;
     border-radius: 50%;
@@ -347,18 +349,18 @@ h1.public-post {
 }
 .post-info input[type="checkbox"] {
     position: absolute;
-    right: 36px;
+    right: 16px;
     height: 20px;
     width: 20px;
     cursor: pointer;
     opacity: 0;
-    z-index: 1;
+    z-index: 3;
 }
 .option-list {
     display: none;
     position: absolute;
-    right: 60px;
-    top: 60px;
+    right: 40px;
+    top: 40px;
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
     border-top: 3px solid #c50000;
     border-radius: 7px 0 7px 7px;
@@ -408,32 +410,55 @@ h1.public-post {
 }
 .post-footer {
     display: flex;
-    justify-content: flex-end;
-    padding: 15px 10px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: #01001b1c;
+}
+.post-footer .comment-input {
+    padding: 7px 20px;
+    font-size: 16px;
+    font-family: 'Inter';
+    border: none;
+    height: 37px;
+    outline: none;
+    width: 95%;
+    resize: none;
+    background-color: transparent;
 }
 .post-footer button {
-    color: #01001ba6;
-    background-color: transparent;
-    border: 1px solid #01001ba6;
-    padding: 8px 16px;
-    border-radius: 20px 20px 20px 0;
+    border: none;
+    padding: 10px 30px;
     outline: none;
     font-size: 18px;
     cursor: pointer;
     transition: .2s;
-}
-.post-footer button i {
-    padding: 0 5px;
-}
-.post-footer button:hover {
-    color: #fff;
+    border-radius: 0 10px 10px 0;
+    transition: .2s;
     background-color: #0300c5;
-    border-color: #0300c5;
+    color: #fefefe;
+}
+.comment-mainsec {
+    display: flex;
+    gap: 30px;
+    justify-content: flex-end;
+}
+.comment-section {
+    margin-bottom: 30px;
+    width: 90%;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background-color: #fefefe;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+.border {
+    border-left: 3px solid #01001b41;
 }
 
 
 footer {
     width: 100%;
+    margin-top: 20px;
     padding: 50px;
     text-align: center;
     color: #ffffffb9;
@@ -498,12 +523,15 @@ footer {
     .post-content p {
         font-size: 12px;
     }
+    .user img {
+        height: 17px;
+        width: 17px;
+    }
     .post-footer button {
         font-size: 14px;
-        padding: 7px 12px;
+        padding: 12px 14px;
     }
-    .user img {
-        height: 16px;
-        width: 16px;
+    .comment-section {
+        width: 82%;
     }
 }

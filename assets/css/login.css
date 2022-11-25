@@ -15,7 +15,7 @@ body {
 }
 .login-form {
     background-color: #fff;
-    padding: 15px 20px;
+    padding: 12px 25px;
     border-radius: 10px;
 }
 .login-form h1 {
@@ -29,16 +29,23 @@ form input, button {
 }
 form input {
     padding: 10px;
-    margin: 10px 0;
     border: 1px solid #b6b6b8;
     border-radius: 5px;
     outline: none;
-    font-size: 18px;
+    font-size: 16px;
     transition: all .2s ease-in-out;
 }
 form input:focus {
     box-shadow: 0 0 12px rgba(0, 34, 255, 0.322);
     border: 1px solid #02f;
+}
+label {
+    color: #01001baf;
+    font-size: 14px;
+}
+.error-msg {
+    color: #ff0000;
+    font-size: 11px;
 }
 .btn-info {
     display: flex;
@@ -52,7 +59,9 @@ form input:focus {
 .remember-me {
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 2px;
+}
+.remember-me label {
     font-size: 11px;
 }
 .btn-sec button {
